@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('content')
-
+ <h2 class="center">{{ Auth::user()->name}}さんの投稿一覧</h2>
 <div class="row justify-content-center container">
-    
     @foreach($reviews as $review)
     @if (Auth::check())
     <div class="col-md-4">

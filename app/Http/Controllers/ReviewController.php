@@ -37,14 +37,17 @@ class ReviewController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
-            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => ['mimes:jpeg,png,jpg,gif,svg|max:2048',
+                        'required',
+                        'file',
+                       ]
         ]);
         
         
 
         if ($request->hasFile('image')) {
-            $request->file('image')->store('/public/images');
-            $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'cotent' => $post['content'], 'image' => $request->file('image')->hashName()];
+            $request->file('image')->store('/public/uploads');
+            $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'content' => $post['content'], 'image' => $request->file('image')->hashName()];
         } else {
             $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'content' => $post['content']];
         }
@@ -95,7 +98,7 @@ class ReviewController extends Controller
         $review = \App\Review::findOrFail($id);
         
         if (\Auth::id() === $review->user_id) {
-            $micropost->delete();
+            $review->delete();
         }
         
         return back();
@@ -125,7 +128,6 @@ class ReviewController extends Controller
             // 認証済みユーザを取得
             $user = \Auth::user();
             // ユーザの投稿の一覧を作成日時の降順で取得
-            // （後のChapterで他ユーザの投稿も取得するように変更しますが、現時点ではこのユーザの投稿のみ取得します）
             $reviews = $user->reviews()->orderBy('created_at', 'desc')->paginate(9);
 
             $data = [
@@ -137,5 +139,6 @@ class ReviewController extends Controller
         // Welcomeビューでそれらを表示
         return view('reviewshow', $data);
     }
+    
     
 }

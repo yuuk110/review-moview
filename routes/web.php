@@ -35,5 +35,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/review/shows', 'ReviewController@shows')->name('shows');
     Route::get('reviewshow', 'ReviewController@reviewshow')->name('reviewshow');
     
+    
 });
 
