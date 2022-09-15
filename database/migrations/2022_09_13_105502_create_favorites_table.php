@@ -23,7 +23,7 @@ class CreateFavoritesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('review_id')->references('id')->on('reviews')->onDelete('cascade');
             
-            // user_idとmicropost_idの重複を許さない → 同じmicropostを何回もお気に入り登録できなくする
+            // user_idとreview_idの重複を許さない → 同じreviewを何回もお気に入り登録できなくする
             $table->unique(['user_id', 'review_id']);
         });
         

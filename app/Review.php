@@ -11,6 +11,7 @@ class Review extends Model
        'image',
        'content',
        
+       
        ];
     
     public function user()
@@ -21,5 +22,10 @@ class Review extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+    
+    public function favorites_users()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'review_id', 'user_id')->withTimestamps();
     }
 }

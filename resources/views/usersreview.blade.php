@@ -1,17 +1,5 @@
 @extends('layouts.app')
-
 @section('content')
-@if (Auth::check())
-<div class="row justify-content-center container">
-    <div class="card">
-        <div class="card-body">
-            <h1>ようこそ{{ Auth::user()->name}}さん</h1>
-        </div>
-    </div>
-</div>
-@else
-
-    
 <div class="row justify-content-center container">
     
     @foreach($reviews as $review)
@@ -19,11 +7,9 @@
     <div class="col-md-4">
         <div class="card mb50">
             <div class="card-body">
-                @if (Auth::check())
-                  <h3>{{ Auth::user()->name }}</h3>
-                @endif
                 
-                <div class='image-wrapper'><img class='movie-image' src="{{ asset('storage/images/'.$review->image) }}"></div>
+                
+                <div class='image-wrapper'><img class='movie-image' src="{{ asset('/uploads/'.$review->image) }}"></div>
                 
                 
                 
@@ -40,7 +26,4 @@
     @endforeach
 </div>
 {{ $reviews->links() }}
- @endif
- 
- 
 @endsection

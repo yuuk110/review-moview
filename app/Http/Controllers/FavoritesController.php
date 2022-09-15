@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Review;
-use App\User;
-
-class UsersController extends Controller
+class FavoritesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +13,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-    
+        //
     }
 
     /**
@@ -35,9 +32,10 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $reviewId)
     {
-        //
+        \Auth::user()->favorite($reviewId);
+        return back();
     }
 
     /**
@@ -48,14 +46,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        
-        $reviews = $user->reviews('created_at', 'desc')->orderBy(9);
-        
-        return view('index', [
-            'user' => $user,
-            'reviews' => $reviews,
-            ]);
+        //
     }
 
     /**
@@ -89,21 +80,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        \Auth::user()->unfavorite($id);
+        return back();
     }
-    
-    public function favorites($id){
-        $user = User::find($id);
-        $favorites = $user->favorites()->paginate(9);
-
-        $data = [
-            'user' => $user,
-            'reviews' => $favorites,
-            ];
-
-        
-
-        return view('favorites', $data);
-    }
-    
 }

@@ -16,11 +16,15 @@
                  <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            {{-- ユーザ詳細ページへのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('users', 'ユーザ詳細') !!}</li>
+                            
+                            {{-- 投稿一覧(自分) --}}
+                            <li class="dropdown-item">{!! link_to_route('reviewshow', '投稿一覧（自分）') !!}</li>
                             <li class="dropdown-divider"></li>
-                            {{-- 投稿一覧 --}}
-                            <li class="dropdown-item">{!! link_to_route('reviewshow', '投稿一覧') !!}</li>
+                            {{-- 投稿一覧(他ユーザ含む) --}}
+                            <li class="dropdown-item">{!! link_to_route('usersreview', '投稿一覧（他ユーザ含む）') !!}</li>
+                            <li class="dropdown-divider"></li>
+                            {{-- お気に入り一覧 --}}
+                            <li class="dropdown-item"></li>
                             <li class="dropdown-divider"></li>
                             {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>

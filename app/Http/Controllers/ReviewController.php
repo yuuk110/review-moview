@@ -46,7 +46,7 @@ class ReviewController extends Controller
         
 
         if ($request->hasFile('image')) {
-            $request->file('image')->store('/public/uploads');
+            $request->file('image')->store('/public/images');
             $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'content' => $post['content'], 'image' => $request->file('image')->hashName()];
         } else {
             $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'content' => $post['content']];
@@ -60,6 +60,7 @@ class ReviewController extends Controller
     public function show($id)
     {
         //
+        
         $review = Review::where('id', $id)->first();
          return view('show', compact('review'));
     }
@@ -95,13 +96,13 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        $review = \App\Review::findOrFail($id);
+        $review = Review::findOrFail($id);
         
         if (\Auth::id() === $review->user_id) {
             $review->delete();
         }
-        
         return back();
+       
     }
     
     public function shows($id)
@@ -115,10 +116,6 @@ class ReviewController extends Controller
         ]);
     }
     
-    public function users()
-    {
-        return view('users');
-    }
     
     public function reviewshow()
     {
@@ -139,6 +136,16 @@ class ReviewController extends Controller
         // Welcomeビューでそれらを表示
         return view('reviewshow', $data);
     }
+    
+    public function usersreview()
+    {
+        $reviews = Review::orderBy('created_at', 'DESC')->paginate(9);
+        
+        return view('usersreview', compact('reviews'));
+    }
+    
+    
+    
     
     
 }

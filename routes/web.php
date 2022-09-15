@@ -31,10 +31,23 @@ Route::get('/show/{id}', 'ReviewController@show')->name('show');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/review', 'ReviewController@create')->name('create');
     Route::post('/review/store', 'ReviewController@store')->name('store');
-    Route::get('users', 'ReviewController@users')->name('users');
     Route::post('/review/shows', 'ReviewController@shows')->name('shows');
     Route::get('reviewshow', 'ReviewController@reviewshow')->name('reviewshow');
+    Route::delete('/destroy{id}', 'ReviewController@destroy')->name('destroy');
+    Route::get('usersreview', 'ReviewController@usersreview')->name('usersreview');
     
+    Route::group(['prefix' => 'reviews/{id}'], function () {
+        // reviews/{id}/favorite
+        Route::post('favorite', 'FavoritesController@store')->name('favorites.favorite');
+
+        // microposts/{id}/unfavorite
+        Route::delete('unfavorite', 'FavoritesController@destroy')->name('favorites.unfavorite');
+    });
     
+    Route::group(['prefix' => 'users/{id}'], function () {
+        // users/{id}/favorites
+        Route::get('favorites', 'UsersController@favorites')->name('favorites');
+    });
+
 });
 
