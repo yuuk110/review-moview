@@ -46,7 +46,7 @@ class ReviewController extends Controller
         
 
         if ($request->hasFile('image')) {
-            $request->file('image')->store('/public/images');
+            $request->file('image')->store('/public/uploads');
             $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'content' => $post['content'], 'image' => $request->file('image')->hashName()];
         } else {
             $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'content' => $post['content']];
@@ -54,7 +54,7 @@ class ReviewController extends Controller
         
         Review::insert($data);
         
-        return redirect('/');
+        return redirect('reviewshow');
     }
     
     public function show($id)
@@ -62,6 +62,7 @@ class ReviewController extends Controller
         //
         
         $review = Review::where('id', $id)->first();
+        
          return view('show', compact('review'));
     }
     
@@ -101,20 +102,11 @@ class ReviewController extends Controller
         if (\Auth::id() === $review->user_id) {
             $review->delete();
         }
-        return back();
+        return redirect('reviewshow');
        
     }
     
-    public function shows($id)
-    {
-        $user = User::findOrFail($id);
-        $reviews = $user->reviews()->orderBy('created_at', 'desc')->paginate(9);
-        
-        return view('show', [
-            'user' => $user,
-            'reviews' => $reviews,
-        ]);
-    }
+    
     
     
     public function reviewshow()

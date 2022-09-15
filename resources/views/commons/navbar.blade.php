@@ -24,7 +24,7 @@
                             <li class="dropdown-item">{!! link_to_route('usersreview', '投稿一覧（他ユーザ含む）') !!}</li>
                             <li class="dropdown-divider"></li>
                             {{-- お気に入り一覧 --}}
-                            <li class="dropdown-item"></li>
+                            <li class="dropdown-item">{!! link_to_route('favorites', 'お気に入り一覧', ['id' => Auth::id()]) !!}</li>
                             <li class="dropdown-divider"></li>
                             {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>

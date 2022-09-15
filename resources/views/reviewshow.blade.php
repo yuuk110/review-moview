@@ -1,7 +1,10 @@
 @extends('layouts.app')
 @section('content')
- <h2 class="center">{{ Auth::user()->name}}さんの投稿一覧</h2>
 <div class="row justify-content-center container">
+ <h2>{{ Auth::user()->name}}さんの投稿一覧</h2>
+</div>
+<div class="row justify-content-center container">
+    
     @foreach($reviews as $review)
     @if (Auth::check())
     <div class="col-md-4">
@@ -9,7 +12,7 @@
             <div class="card-body">
                 
                 
-                <div class='image-wrapper'><img class='movie-image' src="{{ asset('storage/images/'.$review->image) }}"></div>
+                <div class='image-wrapper'><img class='movie-image' src="{{ asset('storage/uploads/' . $review->image) }}"></div>
                 
                 
                 

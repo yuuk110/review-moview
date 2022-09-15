@@ -4,12 +4,14 @@
 
 
 <div class="container">
-    <h1 class='pagetitle'>レビュー詳細</h1>
+    <div class="row justify-content-center container">
+      <h1 class='pagetitle'>レビュー詳細</h1>
+    </div>
     <div class="card">
         <div class="card-body">
             <section class='review-main'>
                  <h2 class='h2'>映画の画像</h2>
-                 <img class='movie-image' src="{{ asset('storage/images/' . $review->image) }}">
+                  <img class='movie-image' src="{{ asset('storage/uploads/' . $review->image) }}">
                  <h2 class='h2'>映画のタイトル</h2>
                  <p class='h2 mb20'>{{ $review->title }}</p>
                  <h2 class='h2'>レビュー内容</h2>

@@ -23,7 +23,7 @@
                   <h3>{{ Auth::user()->name }}</h3>
                 @endif
                 
-                <div class='image-wrapper'><img class='movie-image' src="{{ asset('storage/images/'.$review->image) }}"></div>
+                <div class='image-wrapper'><img class='movie-image' src="{{ asset('storage/uploads/'.$review->image) }}"></div>
                 
                 
                 
