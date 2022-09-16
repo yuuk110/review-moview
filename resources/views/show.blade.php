@@ -13,7 +13,7 @@
                  <h2 class='h2'>映画の画像</h2>
                   <img class='movie-image' src="{{ Storage::disk('s3')->url('uploads/' . $review->image) }}">
                  <h2 class='h2'>映画のタイトル</h2>
-                 <p class='h2 mb20'>{{ $review->title }}</p>
+                 <p class='h2 mb20'>{!! nl2br(e($review->content)) !!}</p>
                  <h2 class='h2'>レビュー内容</h2>
                  <p>{{ $review->content }}</p>
             </section>
