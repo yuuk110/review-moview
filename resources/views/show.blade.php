@@ -11,7 +11,7 @@
         <div class="card-body">
             <section class='review-main'>
                  <h2 class='h2'>映画の画像</h2>
-                  <img class='movie-image' src="{{ asset('storage/uploads/' . $review->image) }}">
+                  <img class='movie-image' src="{{ Storage::disk('s3')->url('uploads/' . $review->image) }}">
                  <h2 class='h2'>映画のタイトル</h2>
                  <p class='h2 mb20'>{{ $review->title }}</p>
                  <h2 class='h2'>レビュー内容</h2>

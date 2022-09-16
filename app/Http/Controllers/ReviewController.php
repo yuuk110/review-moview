@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Review;
 
+use Storage;
+
 class ReviewController extends Controller
 {
     /**
@@ -51,6 +53,12 @@ class ReviewController extends Controller
         } else {
             $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'content' => $post['content']];
         }
+        
+        $image = $request->file('image');
+        $path = Storage::disk('s3')->putFile('/uploads', $image, 'public');
+        
+        
+        $image = basename($path);
         
         Review::insert($data);
         

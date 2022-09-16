@@ -12,7 +12,7 @@
             <div class="card-body">
                 
                 
-                <div class='image-wrapper'><img class='movie-image' src="{{ asset('storage/uploads/' . $review->image) }}"></div>
+                <div class='image-wrapper'><img class='movie-image' src="{{ Storage::disk('s3')->url('uploads/' . $review->image) }}"></div>
                 
                 
                 
