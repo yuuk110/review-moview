@@ -3,6 +3,8 @@
 
 <div class="row justify-content-center container">
     <h2>{{ Auth::user()->name}}さんのお気に入り一覧</h2>
+</div>
+<div class="row justify-content-center container">
      @foreach($reviews as $review)
     
     <div class="col-md-4">
