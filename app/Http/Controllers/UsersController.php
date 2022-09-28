@@ -106,4 +106,8 @@ class UsersController extends Controller
         return view('favorites', $data);
     }
     
+    public function user(){
+        return view('user');
+    }
+    
 }

@@ -17,10 +17,12 @@
                 
                 
                 <h3 class='h3 movie-title'>{{ $review->title }}</h3>
+                <h3 class='h3 movie-recommend'>おすすめ度{{ $review->recommend }}</h2>
                 <p class="description">
                     {!! nl2br(e($review->content)) !!}
                 </p>
                 <a href="{{ route('show', ['id' => $review->id ]) }}" class='btn btn-secondary detail-btn'>詳細</a>
+                <a href="{{ route('edit', ['id' => $review->id ]) }}" class='btn btn-secondary detail-btn'>編集</a>
                 
             </div>
         </div>

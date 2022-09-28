@@ -39,6 +39,7 @@ class ReviewController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'recommend' => 'required|integer|min:1|max:5',
             'image' => ['mimes:jpeg,png,jpg,gif,svg|max:2048',
                         'required',
                         'file',
@@ -49,9 +50,9 @@ class ReviewController extends Controller
 
         if ($request->hasFile('image')) {
             $request->file('image')->store('/public/uploads');
-            $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'content' => $post['content'], 'image' => $request->file('image')->hashName()];
+            $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'recommend' => $post['recommend'], 'content' => $post['content'], 'image' => $request->file('image')->hashName()];
         } else {
-            $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'content' => $post['content']];
+            $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'recommend' => $post['recommend'], 'content' => $post['content']];
         }
         
         $image = $request->file('image');
@@ -82,7 +83,8 @@ class ReviewController extends Controller
      */
     public function edit($id)
     {
-        //
+        $review = Review::find($id);
+        return view('edit', compact('review'));
     }
 
     /**
@@ -94,7 +96,23 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $review = Review::where('id', $id)->first();
+        
+        $review->update([
+            'title' => $request->title,
+            'recommend' => $request->recommend,
+            'content' => $request->content,
+            'image' => $request->file('image')->hashName(),
+        ]);
+        
+        $image = $request->file('image');
+        
+        
+         
+        $path = Storage::disk('s3')->putFile('/uploads', $image, 'public');
+        $image = basename($path);
+        
+        return redirect('reviewshow');
     }
 
     /**

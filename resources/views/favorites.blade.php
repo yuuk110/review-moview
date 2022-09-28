@@ -5,8 +5,9 @@
     <h2>{{ Auth::user()->name}}さんのお気に入り一覧</h2>
 </div>
 <div class="row justify-content-center container">
+     
      @foreach($reviews as $review)
-    
+   
     <div class="col-md-4">
         <div class="card mb50">
             <div class="card-body">
@@ -17,6 +18,7 @@
                 
                 
                 <h3 class='h3 movie-title'>{{ $review->title }}</h3>
+                <h3 class='h3 movie-recommend'>おすすめ度{{ $review->recommend }}</h3>
                 <p class="description">
                     {!! nl2br(e($review->content)) !!}
                 </p>

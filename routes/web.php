@@ -35,6 +35,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reviewshow', 'ReviewController@reviewshow')->name('reviewshow');
     Route::delete('/destroy{id}', 'ReviewController@destroy')->name('destroy');
     Route::get('usersreview', 'ReviewController@usersreview')->name('usersreview');
+    Route::get('edit{id}', 'ReviewController@edit')->name('edit');
+    Route::put('/update{id}', 'ReviewController@update')->name('update');
+    Route::get('user', 'UsersController@user')->name('user');
     
     Route::group(['prefix' => 'reviews/{id}'], function () {
         // reviews/{id}/favorite

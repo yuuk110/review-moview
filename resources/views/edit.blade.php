@@ -1,13 +1,13 @@
 @extends('layouts.app')
-
 @section('content')
-<h1 class='pagetitle'>レビュー投稿画面</h1>
 
+<h1 class='pagetitle'>レビュー編集画面</h1>
 
 <div class="row justify-content-center container">
     <div class="col-md-10">
-        <form method='POST' action="{{ route('store') }}" enctype="multipart/form-data">
+        <form method='POST' action="{{ route('update', $review->id) }}" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
@@ -39,10 +39,12 @@
                         <label>レビュー内容</label>
                         <textarea class='description form-control' name='content' placeholder='本文を入力'></textarea>
                     </div>
-                    <input type='submit' class='btn btn-primary' value='投稿'>
+                    <input type='submit' class='btn btn-primary' value='レビュー編集'>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+
 @endsection

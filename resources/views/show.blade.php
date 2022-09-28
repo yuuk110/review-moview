@@ -14,6 +14,8 @@
                   <img class='movie-image' src="{{ Storage::disk('s3')->url('uploads/' . $review->image) }}">
                  <h2 class='h2'>映画のタイトル</h2>
                  <p class='h2 mb20'>{!! nl2br(e($review->content)) !!}</p>
+                 <h2 class="h2">おすすめ度</h2>
+                 <h3>{{ $review->recommend }}</h3>
                  <h2 class='h2'>レビュー内容</h2>
                  <p>{{ $review->content }}</p>
             </section>

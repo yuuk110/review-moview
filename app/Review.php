@@ -10,6 +10,7 @@ class Review extends Model
        'title',
        'image',
        'content',
+       'recommend'
        
        
        ];
